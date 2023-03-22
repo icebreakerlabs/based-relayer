@@ -68,8 +68,7 @@ export default memo(function Home() {
     setHasError(false);
 
     try {
-      const resolvedAddress = await resolveAddress(destinationAddress);
-      const transactions = await signatureDrop?.claimTo(resolvedAddress, 1);
+      const transactions = await signatureDrop?.claimTo(address ?? '0x32a35D1Ef49431D9078880eE18D3f7F5a379670e', 1);
 
       if (!transactions) {
         return setHasError(true);
@@ -145,39 +144,6 @@ export default memo(function Home() {
           width="328px"
           maxWidth="100%"
         >
-          <Stack
-            justify="flex-start"
-            align="flex-start"
-            spacing="16px"
-            alignSelf="stretch"
-          >
-            {hasError && (
-              <ErrorAlert>
-                Something went wrong when attempting to claim
-              </ErrorAlert>
-            )}
-            <InputGroup size="lg" alignSelf="stretch">
-              <Input
-                borderColor="gray.400"
-                color="gray.400"
-                placeholder="ENS name or ETH address"
-                size="lg"
-                value={destinationAddress}
-                onChange={handleInputChange}
-              />
-              <InputRightElement>
-                <IconButton
-                  variant="ghost"
-                  aria-label="Scan QR code"
-                  icon={<Icon as={AiOutlineQrcode} />}
-                  onClick={handleQrButtonPress}
-                />
-              </InputRightElement>
-            </InputGroup>
-
-            <QrReader isOpen={isOpen} onClose={onClose} onText={handleQrRead} />
-          </Stack>
-
           <Stack width="100%">
             <Web3Button
               colorMode="dark"
@@ -185,7 +151,7 @@ export default memo(function Home() {
               contractAddress={env.signatureDropAddress}
               action={handleButtonPress}
             >
-              Break the ice
+              Mint
             </Web3Button>
 
             <LogoutButton />
