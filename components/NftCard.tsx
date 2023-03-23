@@ -13,7 +13,7 @@ import { type NFT } from "@thirdweb-dev/sdk";
 import NextLink from "next/link";
 
 import AsyncAddressText from "./AsyncAddressText";
-import { env } from "../utils/env";
+import { dropAddress } from "../utils/env";
 import { type NftAttributes } from "../types/nft";
 
 type NftCardProps = {
@@ -29,7 +29,7 @@ export default memo(function NftCard({ tokenId, nft, address }: NftCardProps) {
     <LinkBox>
       <NextLink
         passHref
-        href={`https://opensea.io/assets/ethereum/${env.signatureDropAddress}/${tokenId}`}
+        href={`https://opensea.io/assets/ethereum/${dropAddress}/${tokenId}`}
       >
         <LinkOverlay>
           <Stack justify="flex-start" align="center" spacing="16px">

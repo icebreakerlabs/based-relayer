@@ -1,17 +1,21 @@
 import type { AppProps } from "next/app";
-import { ThirdwebProvider, useContract } from "@thirdweb-dev/react";
-import { BaseGoerli } from "@thirdweb-dev/chains";
+import { ChainId, ThirdwebProvider, useContract } from "@thirdweb-dev/react";
 import Head from "next/head";
 import { ChakraProvider } from '@chakra-ui/react';
-
-import { env } from "../utils/env";
-
 import "../styles/globals.css";
-
+import { activeChain } from "../utils/env";
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
-      <ThirdwebProvider activeChain={BaseGoerli}>
+      <ThirdwebProvider activeChain={activeChain}
+      sdkOptions={{
+        gasless: {
+          openzeppelin: {
+            relayerUrl: process.env.NEXT_PUBLIC_AUTOTASK_URL!
+          }
+        }
+      }}
+      >
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
@@ -19,7 +23,4 @@ export default function App({ Component, pageProps }: AppProps) {
       </ThirdwebProvider>
     </ChakraProvider>
   );
-}
-function Component() {
-  const { contract, isLoading } = useContract("0x38e6F1000cB611B06edFF9c271aEF058675a6c2f");
 }

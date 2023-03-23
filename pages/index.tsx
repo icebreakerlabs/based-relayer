@@ -27,7 +27,7 @@ import ErrorAlert from "../components/ErrorAlert";
 import LogoutButton from "../components/LogoutButton";
 import QrReader from "../components/QrReader";
 
-import { env } from "../utils/env";
+import { dropAddress } from "../utils/env";
 import { resolveAddress } from "../utils/resolveAddress";
 import NftMiniCard from "../components/NftMiniCard";
 
@@ -39,7 +39,7 @@ export default memo(function Home() {
 
   const address = useAddress();
   const { contract: signatureDrop } = useContract(
-    env.signatureDropAddress,
+    dropAddress,
     "signature-drop"
   );
   const { data: count } = useClaimedNFTSupply(signatureDrop);
@@ -148,7 +148,7 @@ export default memo(function Home() {
             <Web3Button
               colorMode="dark"
               accentColor="white"
-              contractAddress={env.signatureDropAddress}
+              contractAddress={dropAddress}
               action={handleButtonPress}
             >
               Mint

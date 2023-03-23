@@ -3,14 +3,14 @@ import { Stack, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { useContract, useNFT, useAddress } from "@thirdweb-dev/react";
-import { env } from "../../utils/env";
+import { dropAddress } from "../../utils/env";
 import NftCard from "../../components/NftCard";
 import TypeformButton from "../../components/TypeformButton";
 
 export default memo(function Minted() {
   const router = useRouter();
   const { tokenId } = router.query;
-  const { contract } = useContract(env.signatureDropAddress);
+  const { contract } = useContract(dropAddress);
   const { data: nft } = useNFT(contract, tokenId as string);
   const address = useAddress();
 
